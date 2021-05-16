@@ -14,5 +14,5 @@ https://aur.archlinux.org/packages/winesync-dkms/
 
 # Problems?
 
-Open issues or @CatLady on Frogging Family discord #support:
+Open issue or @CatLady on Frogging Family discord's #support channel:
 https://discord.gg/jRy3Nxk
