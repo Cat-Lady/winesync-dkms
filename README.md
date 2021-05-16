@@ -6,6 +6,7 @@ https://repo.or.cz/linux/zf.git/shortlog/refs/heads/winesync
 
 ...kernel-side part as external module, handled by DKMS.
 
+---
 Based on openglfreak's work from here:
 https://aur.archlinux.org/packages/winesync-dkms/
 
