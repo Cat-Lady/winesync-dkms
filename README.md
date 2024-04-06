@@ -1,7 +1,7 @@
 # winesync-dkms
 Winesync/fastsync DKMS kernel module.
 ---
-Allows to build the winesync (fastsync):
+Allows to build the winesync/ntsync (fastsync):
 
 https://repo.or.cz/linux/zf.git/shortlog/refs/heads/winesync
 
@@ -16,13 +16,13 @@ https://repo.or.cz/linux/zf.git/shortlog/refs/heads/winesync
 **3.** (Optional, if you don't have fastsync-enabled wine build ready, yet):
 Before building fastsync-enabled wine - for example, using wine-tkg (recommended):
 
-https://github.com/Frogging-Family/wine-tkg-git
+https://github.com/Frogging-Family/wine-tkg-git/issues/936
+
 
 
 ...either on its own (wine mainline only, for now), or using staging rebase of fastsync patches by openglfreak:
 
-https://github.com/openglfreak/wine-tkg-userpatches/tree/next/patches/0001-fastsync
-
+https://github.com/openglfreak/wine-tkg-userpatches/tree/next/patches/0002-fastsync
 
 ...copy winesync.h that you get in ``winesync-dkms`` directory, (as a result of using ``build.sh``) into ``/usr/include/linux/winesync.h`` (be sure to ommit ``-<commit>`` part of the name).
 
