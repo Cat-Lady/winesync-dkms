@@ -1,40 +1,41 @@
 # winesync-dkms
-Winesync/fastsync DKMS kernel module.
+ntsync DKMS kernel module.
+
 ---
-Allows to build the winesync/ntsync (fastsync):
+Allows to build ntsync:
 
-https://repo.or.cz/linux/zf.git/shortlog/refs/heads/winesync
-
+https://github.com/torvalds/linux/blob/master/drivers/misc/ntsync.c
 
 ...kernel-side part as external module, handled by DKMS.
+
 ---
+
 ## Usage:
 **1.** From within the winesync-dkms directory, run ``build.sh`` as a user privilleged to use DKMS (usually, root).
 
-**2.** Copy the ``99-winesync.rules`` into your udev rules directory (usually, ``/etc/udev/rules.d/``), reboot or reload udev rules (``udevadm control --reload; udevadm trigger``).
+**2.** Copy the ``99-ntsync.rules`` into your udev rules directory (usually, ``/etc/udev/rules.d/``).
 
-**3.** (Optional, if you don't have fastsync-enabled wine build ready, yet):
-Before building fastsync-enabled wine - for example, using wine-tkg (recommended):
+**3.** Copy the ``ntsync.conf`` into your module load list directory (usually, ``/etc/modules-load.d/``).
 
-https://github.com/Frogging-Family/wine-tkg-git/issues/936
+**4.** Reboot.
 
+**5.** Obtain/Build wine/proton with ntsync enabled
 
+https://github.com/CachyOS/proton-cachyos/issues/3#issuecomment-2566734394
 
-...either on its own (wine mainline only, for now), or using staging rebase of fastsync patches by openglfreak:
+https://github.com/Frogging-Family/wine-tkg-git/issues/1352
 
-https://github.com/openglfreak/wine-tkg-userpatches/tree/next/patches/0002-fastsync
+**6.** Before trying to run fastsync enabled wine, be sure you disable esync/fsync, and/or enable ntsync, for example, by setting enviromental variables:
 
-...copy winesync.h that you get in ``winesync-dkms`` directory, (as a result of using ``build.sh``) into ``/usr/include/linux/winesync.h`` (be sure to ommit ``-<commit>`` part of the name).
+```WINEFSYNC=0 WINEESYNC=0 WINEFSYNC_FUTEX2=0 WINESYNC=1```
 
-**4.** Before trying to run fastsync enabled wine, be sure you disable esync/fsync, for example, by setting enviromental variables:
+Environment variable might vary depending on ntsync patches used, consult your wine/proton install's documentation
 
-```WINEFSYNC=0 WINEESYNC=0 WINEFSYNC_FUTEX2=0```
-
-**5.** To confirm that your wine is using fastsync properly:
+**7.** To confirm that your wine is using fastsync properly:
 
 a) Check for ``wine: using fast synchronization.`` mesage in stdout (for example, when running the wine stuff from terminal) upon startup.
 
-b) ``lsof /dev/winesync`` *while running* wine stuff should show wine processes as output.
+b) ``lsof /dev/ntsync`` *while running* wine stuff should show wine processes as output.
 
 If you're getting ``wine: using server-side synchronization``, your fastsync is not working properly and you're using vanilla wine sync.
 

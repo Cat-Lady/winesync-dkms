@@ -1,6 +1,6 @@
 ifneq (${KERNELRELEASE},)
 ccflags-y := -I$(src)/include -DWINESYNC_MINOR=243
-obj-m += src/drivers/misc/winesync.o
+obj-m += src/drivers/misc/ntsync.o
 else
 KDIR ?= /lib/modules/`uname -r`/build
 
